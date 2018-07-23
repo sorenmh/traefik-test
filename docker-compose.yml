@@ -1,0 +1,29 @@
+version: "3"
+services:
+  traefik:
+    image: traefik
+    ports:
+      - 80:80
+      - 443:443
+      - 8088
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock
+      - ./traefik.toml:/etc/traefik/traefik.toml:ro
+    labels:
+      - "traefik.backend=traefik"
+      - "traefik.frontend.rule=Host:traefik.localhost"
+      - "traefik.port=8088"
+      - "traefik.enable=true"
+
+  backend:
+    image: nginx
+    volumes:
+     - ./content_root:/usr/share/nginx/html:ro
+    ports:
+     - 80
+    labels:
+      - "traefik.backend=backend"
+      - "traefik.new.frontend.rule=Host:localhost;PathPrefixStrip:/api/someservice"
+      - "traefik.old.frontend.rule=Host:localhost;PathPrefixStrip:/someservice"
+      - "traefik.port=80"
+      - "traefik.enable=true"

@@ -1,0 +1,31 @@
+defaultEntryPoints = ["http"]
+checkNewVersion = true
+debug = true
+logLevel = "DEBUG"
+
+[entryPoints]
+  [entryPoints.http]
+    address = ":80"
+
+
+################################################################
+# Web configuration backend
+################################################################
+[web]
+  address = ":8088"
+  defaultEntryPoints = ["http"]
+
+################################################################
+# Docker configuration backend
+################################################################
+[docker]
+  endpoint = "unix:///var/run/docker.sock"
+  domain = "localhost"
+  watch = true
+
+  # Do not expose containers by default in traefik
+  exposedbydefault = false
+
+  # Use the IP address from the bound port instead of the inner network one. For specific use-case :)
+  usebindportip = false
+
