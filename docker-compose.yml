@@ -1,7 +1,7 @@
 version: "3"
 services:
   traefik:
-    image: traefik
+    image: traefik:1.4.5
     ports:
       - 80:80
       - 443:443
@@ -23,7 +23,7 @@ services:
      - 80
     labels:
       - "traefik.backend=backend"
-      - "traefik.new.frontend.rule=Host:localhost;PathPrefixStrip:/api/someservice"
-      - "traefik.old.frontend.rule=Host:localhost;PathPrefixStrip:/someservice"
+      - "traefik.new.frontend.rule=Host:new.localhost;PathPrefixStrip:/api/someservice"
+      - "traefik.old.frontend.rule=Host:old.localhost;PathPrefixStrip:/someservice"
       - "traefik.port=80"
       - "traefik.enable=true"

@@ -1,4 +1,4 @@
-Make sure you have: `127.0.0.1	localhost traefik.localhost`
+Make sure you have: `127.0.0.1	old.localhost new.localhost traefik.localhost`
 
 in your hosts file at: `/etc/hosts`
 
